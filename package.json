@@ -1,0 +1,20 @@
+{
+  "name": "hackernews-scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.2.0",
+    "cheerio": "^1.0.0-rc.12",
+    "csvtojson": "^2.0.10",
+    "express.js": "^1.0.0",
+    "moment": "^2.29.4",
+    "node-fetch": "^2.6.7",
+    "nodemon": "^2.0.20"
+  }
+}
