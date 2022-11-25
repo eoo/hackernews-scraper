@@ -35,18 +35,24 @@ fetch("https://news.ycombinator.com/newest")
 
     
         // write to csv file
-        let data = "Id, Title, Score, User\n";
+        let headerRow = "Id, Title, Score, User\n";
+        const fileName = moment().format("DD-MM-YYYY") + ".csv";
+        //
+        if (!fs.existsSync(fileName))
+            fs.writeFileSync(fileName, headerRow);
 
+        const fileData = fs.readFileSync(fileName);
+        let data = "";
         for (let i  = 0; i < titles.length; i++) {
+            if (fileData.toString().includes(ids[i])) continue;
             data += ` ${ids[i]}, ${titles[i]}, ${scores[i]}, ${users[i]}\n`;
         }
 
-        const date = moment().format("DD-MM-YYYY");
-        fs.appendFile(`./${date}.csv`, data, function(err) {
+        fs.appendFile(fileName, data, function(err) {
             console.log("The file was saved!");
         });
-        fs.appendFile('./scrapedIds.csv', ids.join("\n"), function(err) {
-            console.log("The file was saved!");
-        });
+        // fs.appendFile('./scrapedIds.txt', ids.join(",\n"), function(err) {
+        //     console.log("The file was saved!");
+        // });
     })
 
