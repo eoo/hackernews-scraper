@@ -33,9 +33,14 @@ fetch("https://news.ycombinator.com/newest")
             users.push(user);
         })
 
+        const times = [];
+        $("span.age").each((i, element) => {
+            const time = $(element).attr("title");
+            times.push(time);
+        })
     
         // write to csv file
-        let headerRow = "Id, Title, Score, User\n";
+        let headerRow = "Id, Title, Score, User, Time\n";
         const fileName = moment().format("DD-MM-YYYY") + ".csv";
         //
         if (!fs.existsSync(fileName))
@@ -45,14 +50,11 @@ fetch("https://news.ycombinator.com/newest")
         let data = "";
         for (let i  = 0; i < titles.length; i++) {
             if (fileData.toString().includes(ids[i])) continue;
-            data += ` ${ids[i]}, ${titles[i]}, ${scores[i]}, ${users[i]}\n`;
+            data += ` ${ids[i]}, ${titles[i]}, ${scores[i]}, ${users[i]}, ${times[i]}\n`;
         }
 
         fs.appendFile(fileName, data, function(err) {
             console.log("The file was saved!");
         });
-        // fs.appendFile('./scrapedIds.txt', ids.join(",\n"), function(err) {
-        //     console.log("The file was saved!");
-        // });
     })
 

@@ -3,8 +3,8 @@ const app = express();
 const port = 3000;
 const csv = require('csvtojson')
 
-app.get('/', (req, res) => {
-    const date = req.query.date;
+app.get('/news/:date', (req, res) => {
+    const date = req.params.date;
     const fileName = `${date}.csv`;
 
     csv()
