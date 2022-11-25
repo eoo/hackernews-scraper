@@ -1,0 +1,1 @@
+*/15 * * * * node $HOME/projects/hackernews-scraper/index.js
